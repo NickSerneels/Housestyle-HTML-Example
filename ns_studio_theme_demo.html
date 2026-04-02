@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>NS Studio — Theme Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ns-orange: #d75a2e;
+      --ns-orange-l: #e87a52;
+      --ns-orange-d: #b04422;
+      --font-sans: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-xl: 20px; --r-full: 999px;
+      --t-snap: 100ms ease; --t-default: 180ms ease; --t-smooth: 300ms ease-out;
+      --container: 1180px;
+    }
+
+    :root,
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --ns-bg: #181817;
+      --ns-surface: #242422;
+      --ns-surface-2: #2e2e2c;
+      --ns-surface-3: #3a3a37;
+      --ns-overlay: rgba(0,0,0,0.60);
+      --ns-text: #fffffe;
+      --ns-text-2: #d0d0cb;
+      --ns-text-3: #a8a8a3;
+      --ns-text-4: #6b6b67;
+      --ns-border: rgba(255,255,255,0.07);
+      --ns-border-2: rgba(255,255,255,0.12);
+      --ns-border-3: rgba(255,255,255,0.20);
+      --ns-orange-bg: #2a1a12;
+      --ns-success: #639922;
+      --ns-success-bg: rgba(99,153,34,0.12);
+      --ns-warning: #ba7517;
+      --ns-warning-bg: rgba(186,117,23,0.12);
+      --ns-danger: #e24b4a;
+      --ns-danger-bg: rgba(226,75,74,0.12);
+      --ns-info: #378add;
+      --ns-info-bg: rgba(55,138,221,0.12);
+      --hero-glow: radial-gradient(circle at 70% 30%, rgba(215,90,46,0.18), transparent 28%), radial-gradient(circle at 20% 10%, rgba(255,255,255,0.05), transparent 20%);
+    }
+
+    [data-theme="light"] {
+      color-scheme: light;
+      --ns-bg: #f4f4f0;
+      --ns-surface: #ffffff;
+      --ns-surface-2: #f0efe9;
+      --ns-surface-3: #e8e7e1;
+      --ns-overlay: rgba(0,0,0,0.35);
+      --ns-text: #181817;
+      --ns-text-2: #3d3d3a;
+      --ns-text-3: #6b6b67;
+      --ns-text-4: #9a9a96;
+      --ns-border: rgba(0,0,0,0.08);
+      --ns-border-2: rgba(0,0,0,0.14);
+      --ns-border-3: rgba(0,0,0,0.22);
+      --ns-orange-bg: #fdeee8;
+      --ns-success: #4a7a18;
+      --ns-success-bg: rgba(74,122,24,0.10);
+      --ns-warning: #8f580f;
+      --ns-warning-bg: rgba(143,88,15,0.10);
+      --ns-danger: #c23332;
+      --ns-danger-bg: rgba(194,51,50,0.10);
+      --ns-info: #1f6bbf;
+      --ns-info-bg: rgba(31,107,191,0.10);
+      --hero-glow: radial-gradient(circle at 70% 30%, rgba(215,90,46,0.10), transparent 28%), radial-gradient(circle at 20% 10%, rgba(0,0,0,0.03), transparent 20%);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme]) {
+        color-scheme: light;
+        --ns-bg: #f4f4f0;
+        --ns-surface: #ffffff;
+        --ns-surface-2: #f0efe9;
+        --ns-surface-3: #e8e7e1;
+        --ns-overlay: rgba(0,0,0,0.35);
+        --ns-text: #181817;
+        --ns-text-2: #3d3d3a;
+        --ns-text-3: #6b6b67;
+        --ns-text-4: #9a9a96;
+        --ns-border: rgba(0,0,0,0.08);
+        --ns-border-2: rgba(0,0,0,0.14);
+        --ns-border-3: rgba(0,0,0,0.22);
+        --ns-orange-bg: #fdeee8;
+        --ns-success: #4a7a18;
+        --ns-success-bg: rgba(74,122,24,0.10);
+        --ns-warning: #8f580f;
+        --ns-warning-bg: rgba(143,88,15,0.10);
+        --ns-danger: #c23332;
+        --ns-danger-bg: rgba(194,51,50,0.10);
+        --ns-info: #1f6bbf;
+        --ns-info-bg: rgba(31,107,191,0.10);
+        --hero-glow: radial-gradient(circle at 70% 30%, rgba(215,90,46,0.10), transparent 28%), radial-gradient(circle at 20% 10%, rgba(0,0,0,0.03), transparent 20%);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: var(--ns-bg);
+      color: var(--ns-text);
+      transition: background var(--t-smooth), color var(--t-default);
+      background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.02)), var(--hero-glow);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(var(--container), calc(100% - 32px)); margin: 0 auto; }
+
+    .ns-nav {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(18px);
+      background: color-mix(in srgb, var(--ns-bg) 82%, transparent);
+      border-bottom: 1px solid var(--ns-border);
+    }
+    [data-theme="light"] .ns-nav {
+      background: color-mix(in srgb, #ffffff 88%, transparent);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 18px; min-height: 78px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; font-size: 1.9rem; font-weight: 800; letter-spacing: -0.04em;
+    }
+    .brand .ns { color: var(--ns-text); }
+    .brand .dot { width: 10px; height: 10px; border-radius: 999px; background: var(--ns-orange); display: inline-block; margin-left: -4px; margin-right: 2px; }
+    .brand .studio { color: var(--ns-text-3); font-weight: 700; }
+    .nav-links { display: flex; align-items: center; gap: 22px; color: var(--ns-text-2); }
+    .nav-links a:hover { color: var(--ns-text); }
+
+    .theme-toggle {
+      display: inline-flex; background: var(--ns-surface-2); border: 1px solid var(--ns-border-2);
+      border-radius: var(--r-full); padding: 3px; gap: 2px;
+    }
+    .theme-toggle-btn {
+      padding: 7px 12px; border-radius: var(--r-full); font-size: 12px; font-weight: 600;
+      font-family: var(--font-sans); color: var(--ns-text-3); border: none; background: transparent; cursor: pointer;
+      transition: background var(--t-snap), color var(--t-snap), transform var(--t-snap);
+    }
+    .theme-toggle-btn.active {
+      background: var(--ns-surface); color: var(--ns-text); box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .theme-toggle-btn:hover:not(.active) { color: var(--ns-text-2); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: var(--r-md);
+      padding: 12px 18px; font-size: 14px; font-weight: 700; transition: all var(--t-default); cursor: pointer;
+    }
+    .btn-primary { background: var(--ns-orange); color: #fff; border: none; }
+    .btn-primary:hover { background: var(--ns-orange-l); transform: translateY(-1px); }
+    .btn-primary:active { background: var(--ns-orange-d); }
+    .btn-secondary { background: var(--ns-surface-3); color: var(--ns-text); border: 1px solid var(--ns-border-2); }
+    .btn-secondary:hover { border-color: var(--ns-border-3); }
+    .btn-ghost { background: transparent; color: var(--ns-text-3); border: 1px solid var(--ns-border-2); }
+    .btn-ghost:hover { color: var(--ns-text); border-color: var(--ns-border-3); }
+
+    .hero {
+      padding: 72px 0 44px;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: stretch;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: var(--r-full);
+      background: var(--ns-orange-bg); color: var(--ns-orange-l); border: 1px solid rgba(215,90,46,0.25); font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    [data-theme="light"] .eyebrow { color: var(--ns-orange-d); }
+    .hero h1 {
+      margin: 18px 0 14px; font-size: clamp(2.4rem, 5vw, 4.7rem); line-height: 0.98; letter-spacing: -0.06em;
+    }
+    .hero h1 .accent { color: var(--ns-orange); }
+    .hero p {
+      margin: 0 0 28px; color: var(--ns-text-2); font-size: 1.08rem; line-height: 1.65; max-width: 58ch;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .ns-card {
+      background: var(--ns-surface);
+      border: 1px solid var(--ns-border);
+      border-radius: var(--r-xl);
+      padding: 28px;
+      transition: transform var(--t-default), border-color var(--t-default), box-shadow var(--t-default), background var(--t-default);
+    }
+    [data-theme="light"] .ns-card {
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
+      border-color: transparent;
+    }
+    .ns-card:hover { transform: translateY(-2px); }
+    [data-theme="light"] .ns-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.06);
+    }
+    .ns-card-nested {
+      background: var(--ns-surface-2); border: 1px solid var(--ns-border); border-radius: var(--r-lg); padding: 18px;
+    }
+
+    .hero-panel {
+      min-height: 100%; display: grid; gap: 16px;
+      background:
+        radial-gradient(circle at 65% 25%, rgba(215,90,46,0.16), transparent 22%),
+        linear-gradient(180deg, color-mix(in srgb, var(--ns-surface) 90%, transparent), var(--ns-surface-2));
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-panel::after {
+      content: ""; position: absolute; inset: auto -30px -40px auto; width: 180px; height: 180px;
+      border-radius: 999px; background: radial-gradient(circle, rgba(215,90,46,0.18), transparent 65%); pointer-events: none;
+    }
+    .mock-window {
+      border-radius: 18px; border: 1px solid var(--ns-border-2); overflow: hidden; background: var(--ns-bg);
+    }
+    .window-top {
+      display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--ns-border);
+      background: var(--ns-surface-2);
+    }
+    .window-top span { width: 10px; height: 10px; border-radius: 50%; background: var(--ns-surface-3); }
+    .window-top span:nth-child(1) { background: var(--ns-danger); }
+    .window-top span:nth-child(2) { background: var(--ns-warning); }
+    .window-top span:nth-child(3) { background: var(--ns-success); }
+    .window-body { padding: 20px; display: grid; gap: 16px; }
+    .tiny-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .mini-card { background: var(--ns-surface); border: 1px solid var(--ns-border); border-radius: 14px; padding: 14px; min-height: 82px; }
+    .mini-line { height: 8px; border-radius: 999px; background: var(--ns-surface-3); margin-bottom: 10px; }
+    .mini-line.orange { background: linear-gradient(90deg, var(--ns-orange), var(--ns-orange-l)); }
+
+    section { padding: 22px 0 56px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .section-head h2 { margin: 0; font-size: clamp(1.7rem, 2vw, 2.5rem); letter-spacing: -0.05em; }
+    .section-head p { margin: 8px 0 0; color: var(--ns-text-2); }
+
+    .feature-grid,
+    .download-grid,
+    .support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .tool-card h3, .download-card h3, .support-card h3 { margin: 14px 0 8px; font-size: 1.1rem; }
+    .tool-card p, .download-card p, .support-card p { color: var(--ns-text-2); line-height: 1.55; margin: 0 0 18px; }
+    .icon-badge {
+      width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center;
+      background: var(--ns-orange-bg); border: 1px solid rgba(215,90,46,0.22); color: var(--ns-orange); font-weight: 800;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 7px 10px; border-radius: var(--r-full); font-size: 12px; font-weight: 700;
+      border: 1px solid transparent;
+    }
+    .badge-orange { background: var(--ns-orange-bg); color: var(--ns-orange-l); border-color: rgba(215,90,46,0.30); }
+    [data-theme="light"] .badge-orange { color: var(--ns-orange-d); border-color: rgba(215,90,46,0.25); }
+    .badge-success { background: var(--ns-success-bg); color: var(--ns-success); border-color: color-mix(in srgb, var(--ns-success) 30%, transparent); }
+    .badge-info { background: var(--ns-info-bg); color: var(--ns-info); border-color: color-mix(in srgb, var(--ns-info) 30%, transparent); }
+
+    .ns-input {
+      background: var(--ns-surface-2); border: 1px solid var(--ns-border-2); border-radius: var(--r-md);
+      padding: 13px 14px; font-family: var(--font-sans); font-size: 14px; color: var(--ns-text); outline: none; width: 100%;
+      transition: border-color var(--t-default), box-shadow var(--t-default);
+    }
+    .ns-input::placeholder { color: var(--ns-text-4); }
+    .ns-input:focus { border-color: var(--ns-orange); }
+    [data-theme="dark"] .ns-input:focus { box-shadow: 0 0 0 3px rgba(215,90,46,0.20); }
+
+    .newsletter {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; align-items: center;
+      background: linear-gradient(135deg, var(--ns-surface), color-mix(in srgb, var(--ns-orange-bg) 38%, var(--ns-surface)));
+    }
+    .newsletter-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+
+    .ns-code {
+      background: var(--ns-surface-2); border: 1px solid var(--ns-border); border-radius: var(--r-md); padding: 14px 16px;
+      font-family: var(--font-mono); font-size: 13px; color: var(--ns-orange); overflow-x: auto; white-space: pre-wrap;
+    }
+    .footer {
+      padding: 20px 0 46px; color: var(--ns-text-3);
+    }
+    .footer-line { height: 1px; background: var(--ns-border); margin: 0 0 20px; border: none; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+    :focus-visible {
+      outline: 2px solid var(--ns-orange); outline-offset: 3px; border-radius: var(--r-sm);
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .newsletter, .feature-grid, .download-grid, .support-grid { grid-template-columns: 1fr; }
+      .nav-inner { flex-wrap: wrap; justify-content: center; padding: 12px 0; }
+      .nav-links { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; }
+      .newsletter-form { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding-top: 38px; }
+      .ns-card { padding: 20px; }
+      .hero h1 { font-size: 2.3rem; }
+      .brand { font-size: 1.55rem; }
+      .theme-toggle { width: 100%; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('ns-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <header class="ns-nav">
+    <div class="container nav-inner">
+      <div class="brand" aria-label="NS Studio">
+        <span class="ns">NS</span><span class="dot"></span><span class="studio">Studio</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#tools">Tools</a>
+        <a href="#downloads">Downloads</a>
+        <a href="#support">Support</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="theme-toggle" role="group" aria-label="Color theme">
+        <button class="theme-toggle-btn" data-set-theme="dark">☽ Dark</button>
+        <button class="theme-toggle-btn" data-set-theme="light">☀ Light</button>
+        <button class="theme-toggle-btn" data-set-theme="system">⊙ System</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="ns-card">
+          <div class="eyebrow">AI tools · plugins · calculators</div>
+          <h1>Build a smart, modular home for <span class="accent">NS Studio</span>.</h1>
+          <p>A dark-first house style for hobby-built AI tools, lightweight software, download pages, plugin landing pages, and a flexible website that can grow into donations, feature requests, and merch.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#tools">Explore tools</a>
+            <a class="btn btn-secondary" href="#downloads">Latest downloads</a>
+            <a class="btn btn-ghost" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="ns-card hero-panel">
+          <div class="meta-row">
+            <span class="badge badge-orange">Dark-first</span>
+            <span class="badge badge-success">Expandable</span>
+            <span class="badge badge-info">Easy to maintain</span>
+          </div>
+          <div class="mock-window">
+            <div class="window-top"><span></span><span></span><span></span></div>
+            <div class="window-body">
+              <div class="ns-card-nested">
+                <div class="mini-line orange" style="width: 44%"></div>
+                <div class="mini-line" style="width: 82%"></div>
+                <div class="mini-line" style="width: 66%; margin-bottom: 0"></div>
+              </div>
+              <div class="tiny-grid">
+                <div class="mini-card"><div class="mini-line orange" style="width: 70%"></div><div class="mini-line" style="width: 86%"></div><div class="mini-line" style="width: 44%; margin-bottom:0"></div></div>
+                <div class="mini-card"><div class="mini-line" style="width: 60%"></div><div class="mini-line orange" style="width: 84%"></div><div class="mini-line" style="width: 50%; margin-bottom:0"></div></div>
+                <div class="mini-card"><div class="mini-line" style="width: 74%"></div><div class="mini-line" style="width: 90%"></div><div class="mini-line orange" style="width: 36%; margin-bottom:0"></div></div>
+              </div>
+              <div class="ns-code">const theme = 'ns-studio';\naccent = '#d75a2e';\nmode = 'dark-first';</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Featured tools</h2>
+            <p>Cards, labels, buttons, and content blocks in the NS Studio system.</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="ns-card tool-card">
+            <div class="icon-badge">AI</div>
+            <h3>Prompt Helper</h3>
+            <p>Generate structured prompts and reusable workflows for everyday office tasks and creative experiments.</p>
+            <div class="meta-row">
+              <span class="badge badge-orange">Web tool</span>
+              <span class="badge badge-success">Free</span>
+            </div>
+            <a class="btn btn-primary" href="#">Open tool</a>
+          </article>
+          <article class="ns-card tool-card">
+            <div class="icon-badge">PL</div>
+            <h3>Plugin Pack</h3>
+            <p>A modular download page style for plugins, small utilities, updates, changelogs, and installation notes.</p>
+            <div class="meta-row">
+              <span class="badge badge-info">Desktop</span>
+              <span class="badge badge-orange">Versioned</span>
+            </div>
+            <a class="btn btn-secondary" href="#">View details</a>
+          </article>
+          <article class="ns-card tool-card">
+            <div class="icon-badge">CX</div>
+            <h3>Calc Studio</h3>
+            <p>A clean layout for calculators and mini apps with compact controls, result panels, and support links.</p>
+            <div class="meta-row">
+              <span class="badge badge-orange">Calculator</span>
+              <span class="badge badge-success">Fast UI</span>
+            </div>
+            <a class="btn btn-secondary" href="#">Try layout</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="downloads">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Downloads area</h2>
+            <p>This section shows how release cards and software blocks can look in both themes.</p>
+          </div>
+        </div>
+        <div class="download-grid">
+          <article class="ns-card download-card">
+            <div class="meta-row">
+              <span class="badge badge-orange">v2.4.1</span>
+              <span class="badge badge-success">Latest</span>
+            </div>
+            <h3>NS Prompt Builder</h3>
+            <p>Windows/macOS package with installer, release notes, and quick setup guide.</p>
+            <a class="btn btn-primary" href="#">Download</a>
+          </article>
+          <article class="ns-card download-card">
+            <div class="meta-row">
+              <span class="badge badge-orange">Plugin</span>
+              <span class="badge badge-info">Beta</span>
+            </div>
+            <h3>NS Utility Panel</h3>
+            <p>Compact interface add-on for lightweight workflows and tool shortcuts.</p>
+            <a class="btn btn-secondary" href="#">See changelog</a>
+          </article>
+          <article class="ns-card download-card">
+            <div class="meta-row">
+              <span class="badge badge-orange">Docs</span>
+              <span class="badge badge-info">Guide</span>
+            </div>
+            <h3>Installation Help</h3>
+            <p>Use this block style for tutorials, support docs, FAQs, and getting-started pages.</p>
+            <a class="btn btn-ghost" href="#">Read guide</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="support">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Support and growth</h2>
+            <p>Built for feature requests, donations today, and merch later.</p>
+          </div>
+        </div>
+        <div class="support-grid">
+          <article class="ns-card support-card">
+            <h3>Feature requests</h3>
+            <p>Use clean forms and nested cards for roadmap ideas, user feedback, and contact intake.</p>
+            <input class="ns-input" type="text" placeholder="Describe a feature idea" />
+          </article>
+          <article class="ns-card support-card">
+            <h3>Donations</h3>
+            <p>Orange CTA for direct support, with enough contrast in both dark and light mode.</p>
+            <a class="btn btn-primary" href="#">Support NS Studio</a>
+          </article>
+          <article class="ns-card support-card" id="contact">
+            <h3>Contact</h3>
+            <p>Keep contact paths simple: email, form, socials, or a single support page.</p>
+            <a class="btn btn-secondary" href="#">Send message</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="ns-card newsletter">
+          <div>
+            <div class="eyebrow">Stay updated</div>
+            <h2 style="margin:16px 0 10px; font-size: clamp(1.8rem, 2.3vw, 2.8rem); letter-spacing:-0.05em;">Use this as your mailing list or release update block.</h2>
+            <p style="margin:0; color:var(--ns-text-2); line-height:1.6;">It works as a homepage signup, release tracker, or early-access announcement component.</p>
+          </div>
+          <form class="newsletter-form">
+            <input class="ns-input" type="email" placeholder="Enter your email" />
+            <button class="btn btn-primary" type="button">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <hr class="footer-line" />
+      <div class="footer-grid">
+        <div>NS Studio — AI tools, software, plugins, and calculators.</div>
+        <div>Dark-first house style demo</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function setTheme(theme) {
+      const root = document.documentElement;
+      if (theme === 'system') {
+        root.removeAttribute('data-theme');
+        localStorage.removeItem('ns-theme');
+      } else {
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('ns-theme', theme);
+      }
+      syncThemeButtons();
+    }
+
+    function currentThemeSetting() {
+      return localStorage.getItem('ns-theme') || 'system';
+    }
+
+    function syncThemeButtons() {
+      const active = currentThemeSetting();
+      document.querySelectorAll('[data-set-theme]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.setTheme === active);
+      });
+    }
+
+    document.querySelectorAll('[data-set-theme]').forEach(btn => {
+      btn.addEventListener('click', () => setTheme(btn.dataset.setTheme));
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (!localStorage.getItem('ns-theme')) {
+        syncThemeButtons();
+      }
+    });
+
+    syncThemeButtons();
+  </script>
+</body>
+</html>
